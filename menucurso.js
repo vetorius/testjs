@@ -28,7 +28,7 @@ function rescatarDatosCurso(){
         // rescatamos el nombre, la URL y la imagen de la descripción
         var contentObject = {
           name: contentName,
-          link: $(`li[id=${content}] a`).attr("href"),
+          link: $(`li[id=${content}] a:first`).attr("href"),
           imageUrl: $(`li[id=${content}] div.contentafterlink img`).attr("src")
         };
         sectionObject.activities.push(contentObject); // guardamos actividad
