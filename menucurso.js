@@ -91,8 +91,8 @@ $(document).ready(function() {
     if ($('.menuu').attr('data') == '0' ) {
 //    var menuItemsArray = localStorage.getItem('menuItems');
 //    menuItemsArray= JSON.parse(menuItemsArray);
-    var menuList = $('.menuu');
-    $('.menuu').attr('data','1');
+    const menuList = document.getElementById('menuu');
+    menuList.setAttribute('data', '1');
 /****************************
  * 
  *  mi código aquí
