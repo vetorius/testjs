@@ -1,8 +1,8 @@
-/* 
-  funcion rescatarDatosCurso
-  recorre el curso para obtener los datos necesarios
-  y los devuelve en forma de un objeto javaScript (JSON)
-*/
+/**
+ *  funcion rescatarDatosCurso
+ * recorre el curso para obtener los datos necesarios
+ * y los devuelve en forma de un objeto javaScript (JSON)
+ */
 
 function rescatarDatosCurso(){
 
@@ -40,9 +40,13 @@ function rescatarDatosCurso(){
   return courseContent;
 }
 
-$(document).ready(function() {
+//código cuando la página está lista
 
+$(document).ready(function() {
+  // obtenemos la información del curso en un objeto
   const courseData = rescatarDatosCurso();
+
+  // ajustamos visibilidad de elementos
   $('.menuu').attr('data','0');
   $('#page').attr('style','margin-top: 0px');
   $('.card').attr('style','border: 0px');
@@ -52,19 +56,14 @@ $(document).ready(function() {
   $('#region-main').removeClass("has-blocks");
   $('.menu-button').attr('data','0');
 
-  // **********************************
-  // *   comenzamos a refactorizar   *
-  // *********************************
+  // evento pulsar el botón superior derecho
   $('.menu-toggle').click(function() {
 
     $("body").css({'overflow':'auto'});
     $(".no-overflow").css({'text-align':'left'});
     $('.no-overflow').css({'overflow':'inherit'});
-    //$('.menuu').css({'top':'-50px','left':'-170px'});
-    //$('.menuu2').css({'top':'-50px','left':'-170px'});
     $('.menusection').addClass('hide');
     $('#inst187').toggleClass('move');
-    //$('.card').toggleClass('hide');
     $('.card').hide();
     $("#region-main-settings-menu .dropdown-toggle>.icon").toggleClass('hide');
     $(this).toggleClass('toggle-switch-menu-open');
@@ -82,76 +81,48 @@ $(document).ready(function() {
     }
       
     $('.menuu').toggleClass('hide');
-    //$('.menuu2').toggleClass('hide');
     $('.course-content').toggleClass('move');
 
-    //if (localStorage.getItem('menuItems') === null) {
-    //  saveMenuItems();
-    //}
+    // si no está generado el menú lo generamos
     if ($('.menuu').attr('data') == '0' ) {
-//    var menuItemsArray = localStorage.getItem('menuItems');
-//    menuItemsArray= JSON.parse(menuItemsArray);
-    const menuList = document.getElementById('menuu');
-    menuList.setAttribute('data', '1');
-/****************************
- * 
- *  mi código aquí
- * 
- */
-    const fragment = document.createDocumentFragment();
-    var k = 1;
-    for (const section of courseData) {
-      const divSection = document.createElement('DIV');
-      divSection.classList.add('maiin-menu');
-      const divItems = document.createElement('DIV');
-      divItems.classList.add('items');
-//      divItems.setAttribute('style', `cursor: pointer; background-image: url('${section.imageUrl}')`);
-      divItems.style = `cursor: pointer; background-image: url('${section.imageUrl}')`;
-      divSection.appendChild(divItems);
-      const divContent = document.createElement('DIV');
-      divContent.classList.add('content');
-      const linkBtn = document.createElement('A');
-      linkBtn.classList.add('btn-link');
-      linkBtn.setAttribute('id', k);
-//      linkBtn.setAttribute('onclick', 'menuu2open(this)');
-//      linkBtn.setAttribute('style', 'cursor: pointer;');
-      linkBtn.style = 'cursor: pointer;';
-      linkBtn.textContent = section.title;
-      divContent.appendChild(linkBtn);
-      divSection.appendChild(divContent);
-      fragment.appendChild(divSection);
-      k++;
-    }
-    menuList.appendChild(fragment);
-/**
- * final
- */
-/*     for (var j=0, k=1; j<menuItemsArray.length; j+=2, k++){
-      var div1 = $('<div/>')
-        .addClass('maiin-menu')
-        .appendTo(menuList);
-      var div2 = $('<div/>')
-        .css('cursor', 'pointer')
-        .addClass('items')
-        .css('background-image', 'url(' + menuItemsArray[j] + ')')
-        .appendTo(div1);
-      var div3 = $('<div/>')
-        .addClass('content')
-        .appendTo(div1);
-      var a = $('<a/>')
-        .addClass('btn-link')
-        .attr('id', k)
-        .css('cursor', 'pointer')
-        .html(menuItemsArray[j+1])
-        .attr('onclick', 'menuu2open(this)')
-        .appendTo(div3);
-      } */
-    }
+      // capturamos la capa del menú y ajustamos data=1
+      const menuList = document.getElementById('menuu');
+      menuList.setAttribute('data', '1');
 
+      const fragment = document.createDocumentFragment();
+      var k = 0;
+      for (const section of courseData) {
+        // crear capa sección
+        const divSection = document.createElement('DIV');
+        divSection.classList.add('maiin-menu');
+        // crear capa item para mostrar la imagen
+        const divItems = document.createElement('DIV');
+        divItems.classList.add('items');
+        divItems.style = `cursor: pointer; background-image: url('${section.imageUrl}')`;
+        // añadir la capa item a la capa sección
+        divSection.appendChild(divItems);
+        // crear capa content para incluir el enlace
+        const divContent = document.createElement('DIV');
+        divContent.classList.add('content');
+        // crear el enlace
+        const linkBtn = document.createElement('A');
+        linkBtn.classList.add('btn-link');
+        linkBtn.setAttribute('id', k);
+        linkBtn.style = 'cursor: pointer;';
+        linkBtn.textContent = section.title;
+        // añadir enlace a capa content
+        divContent.appendChild(linkBtn);
+        // añadir capa content a capa sección
+        divSection.appendChild(divContent);
+        // añadir capa sección al fragmento
+        fragment.appendChild(divSection);
+        k++;
+      }
+      // añadir el fragmento a la capa del menú
+      menuList.appendChild(fragment);
+   }
   });
-  // *********************************
-  // *   fin de la refactorización   *
-  // *********************************
+
 
 });
 
