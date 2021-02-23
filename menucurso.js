@@ -89,6 +89,10 @@ function rescatarDatosCurso(){
   return courseContent;
 }
 
+function menuu2open(e) {
+  alert("abrir menuu2 "+ e);
+}
+
 //código cuando la página está lista
 
 $(document).ready(function() {
@@ -132,7 +136,7 @@ $(document).ready(function() {
     $('.menuu').toggleClass('hide');
     $('.course-content').toggleClass('move');
 
-    // si no está generado el menú lo generamos
+    // si no está generado el menú de temas lo generamos
     if ($('.menuu').attr('data') == '0' ) {
       // capturamos la capa del menú y ajustamos data=1
       const menuList = document.getElementById('menuu');
@@ -157,6 +161,7 @@ $(document).ready(function() {
         const linkBtn = document.createElement('A');
         linkBtn.classList.add('btn-link');
         linkBtn.setAttribute('id', k);
+        linkBtn.setAttribute('onclick', `menuu2open(${k})`);
         linkBtn.style = 'cursor: pointer;';
         linkBtn.textContent = section.title;
         // añadir enlace a capa content
