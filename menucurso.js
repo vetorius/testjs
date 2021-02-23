@@ -90,14 +90,25 @@ function rescatarDatosCurso(){
 }
 
 function menuu2open(e) {
-  alert(courseData[e].title);
+  const courseData = localStorage.getItem('courseData');
+  if (courseData != null){
+    alert(courseData[e].title);
+  } else {
+    alert("error");
+  }
+  
 }
 
-// obtenemos la información del curso en un objeto
-const courseData = rescatarDatosCurso();
+
 
 //código cuando la página está lista
 $(document).ready(function() {
+  // obtenemos la información del curso en un objeto y lo guardamos en local storage
+  const courseData = rescatarDatosCurso();
+  if (localStorage.getItem('courseData') == null){
+    localStorage.setItem('courseData', JSON.stringify(courseData));
+  }
+
 
   // ajustamos visibilidad de elementos
   $('.menuu').attr('data','0');
