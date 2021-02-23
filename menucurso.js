@@ -90,7 +90,7 @@ function rescatarDatosCurso(){
 }
 
 function menuu2open(e) {
-  const courseData = localStorage.getItem('courseData');
+  const courseData = JSON.parse(localStorage.getItem('courseData'));
   if (courseData != null){
     alert(courseData[e].title);
   } else {
