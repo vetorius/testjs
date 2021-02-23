@@ -1,38 +1,87 @@
 /**
+ *  funcion subsectionTitle
+ *  toma el código de una subsección 
+ *  y devuelve una cadena con el título
+ * 
+ */
+
+function subsectionTitle(code){
+
+  const subsectionValues = {
+      GUI: 'Guía didáctica', ACO: 'Acogida',
+      SEM: 'Seminario', PRO: 'Proyecto',
+      TRA: 'Trabajo personal o en grupo',
+      ACT: 'Actividad formativa', CIE: 'Cierre'
+  };
+  if (code.includes('-')) {
+      var splitted = code.split('-');
+      return subsectionValues[splitted[0]]+' '+splitted[1];
+  }
+  return subsectionValues[code];
+}
+
+/**
  *  funcion rescatarDatosCurso
- * recorre el curso para obtener los datos necesarios
- * y los devuelve en forma de un objeto javaScript (JSON)
+ *  recorre el curso para obtener los datos necesarios
+ *  y los devuelve en forma de un objeto javaScript (JSON)
+ * 
  */
 
 function rescatarDatosCurso(){
 
-  var courseContent = [];
+  let courseContent = [];
 
   // recorremos cada sección
   $("li[id^='section-']").each(function(){
-    var section = $(this).attr("id");
+    const section = $(this).attr("id");
     if(section.split("-")[1] !== "0"){ //eliminamos la sección 0
       let imageSelector = `li[id='${section}'] div.content div.summary img`;
       // rescatamos la URL de la imagen de la sección y el nombre de su texto alternativo
-      var sectionObject = {
+      const sectionObject = {
         title: $(imageSelector).attr("alt"),
         imageUrl: $(imageSelector).attr("src"),
-        activities: []
+        subsections: []
       };
-      let contentSelector = `li[id='${section}'] div.content li.activity`;
+      // seleccionamos las actividades
+      const activitySelector = `li[id='${section}'] div.content li.activity`;
       // recorremos las actividades
-      $(contentSelector).each(function(){
-        var content = $(this).attr("id")
-        var contentName = $(`li[id=${content}] span.instancename`).text();
-        contentName = contentName.slice(0, contentName.lastIndexOf(" "));
-        // rescatamos el nombre, la URL y la imagen de la descripción
-        var contentObject = {
-          name: contentName,
-          link: $(`li[id=${content}] div.activityinstance a:first`).attr("href"),
-          imageUrl: $(`li[id=${content}] div.contentafterlink img`).attr("src")
-        };
-        sectionObject.activities.push(contentObject); // guardamos actividad
+      const subsecciones = [];
+      var maxIndex = 0;
+      $(activitySelector).each(function(){
+        const activityId = $(this).attr("id");
+        let activityName = $(`li[id=${activityId}] span.instancename`).text();
+        activityName = activityName.slice(0, activityName.lastIndexOf(" "));
+        activityLink = $(`li[id=${activityId}] div.activityinstance a:first`).attr("href");
+        activityImageUrl = $(`li[id=${activityId}] div.contentafterlink img`).attr("src");
+        const subseccion = [ activityName.split(".")[0],
+                             subsectionTitle(activityName.split(".")[1]),
+                             activityName.split(".")[3],
+                             activityLink,
+                             activityImageUrl]
+        if (activityName.split(".")[0] > maxIndex) {
+          maxIndex = parseInt(activityName.split(".")[0])
+        }
+        subsecciones.push(subseccion);
       });
+      for (let index = 0; index <= maxIndex; index++) {
+        let submatrix = subsecciones.filter(function(subsection){
+          return subsection[0] == index;
+        });
+        const subsection = {
+          id: submatrix[0][0],
+          title: submatrix[0][1],
+          activities: []
+        }
+        submatrix.forEach(function(actividad){
+          const theActivity = {
+            name: actividad[2],
+            link: actividad[3],
+            imageUrl: actividad[4]
+          }
+          subsection.activities.push(theActivity);
+        });
+        sectionObject.subsections.push(subsection);
+      }
       courseContent.push(sectionObject); // guardamos sección
     };
   });
