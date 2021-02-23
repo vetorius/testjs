@@ -89,9 +89,7 @@ function rescatarDatosCurso(){
   return courseContent;
 }
 
-function menuu2open(e) {
-  alert("abrir menuu2 "+ e);
-}
+
 
 //código cuando la página está lista
 
@@ -175,6 +173,10 @@ $(document).ready(function() {
       // añadir el fragmento a la capa del menú
       menuList.appendChild(fragment);
    }
+
+    function menuu2open(e) {
+      alert(courseData[e].title);
+    }
   });
 
 
