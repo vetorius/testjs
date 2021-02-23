@@ -93,11 +93,11 @@ function menuu2open(e) {
   alert(courseData[e].title);
 }
 
-//código cuando la página está lista
+// obtenemos la información del curso en un objeto
+const courseData = rescatarDatosCurso();
 
+//código cuando la página está lista
 $(document).ready(function() {
-  // obtenemos la información del curso en un objeto
-  var courseData = rescatarDatosCurso();
 
   // ajustamos visibilidad de elementos
   $('.menuu').attr('data','0');
