@@ -236,7 +236,7 @@ $(document).ready(function() {
             const subitemLink = document.createElement('A');
             subitemLink.setAttribute('href', activity.link);
             subitemLink.setAttribute('target', '_blank');
-            const subitemImage = documet.createElement('IMG');
+            const subitemImage = document.createElement('IMG');
             subitemImage.setAttribute('src', activity.imageUrl)
             subitemImage.setAttribute('alt', activity.name);
             //subitemImage.setAttribute('height','100'); // descomentar para cambiar el tamaño
