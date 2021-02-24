@@ -221,7 +221,7 @@ $(document).ready(function() {
         var j=1;
         for (const subsection of section.subsections) {
           const detailsTag = document.createElement('DETAILS');
-          detailsTag.classList.add('subm', `sum${k}`);
+          detailsTag.classList.add('subm', `sum${j}`);
           const summaryTag = document.createElement('SUMMARY');
           summaryTag.textContent = subsection.title;
           console.log(subsection.title);
