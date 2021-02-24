@@ -204,8 +204,8 @@ $(document).ready(function() {
     if (document.getElementById('menuu2').getAttribute('data') == '0' ) {
 
       // capturamos la capa del menú y ajustamos data=1
-      const menuList = document.getElementById('menuu2');
-      menuList.setAttribute('data', '1');
+      const menuList2 = document.getElementById('menuu2');
+      menuList2.setAttribute('data', '1');
 
       // creamos un fragmento para luego incluirlo en la capa
       const fragment = document.createDocumentFragment();
@@ -216,6 +216,7 @@ $(document).ready(function() {
         const divSection = document.createElement('SECTION');
         divSection.classList.add('menusection', 'hide');
         divSection.setAttribute('id', `sec-${k}`);
+        console.log(section.title);
         // recorremos las subsecciones
         var j=1;
         for (const subsection of section.subsections) {
@@ -223,11 +224,13 @@ $(document).ready(function() {
           detailsTag.classList.add('subm', `sum${k}`);
           const summaryTag = document.createElement('SUMMARY');
           summaryTag.textContent = subsection.title;
+          console.log(subsection.title);
           detailsTag.appendChild(summaryTag);
           const divSubgrid = document.createElement('DIV');
           divSubgrid.classList.add('subgrid', 'subm');
           // para cada subsección recorremos las actividades
           for (const activity of subsection.activities) {
+            console.log(activity.name);
             const divSubitem = document.createElement('DIV');
             divSubitem.classList.add('subitem');
             const subitemLink = document.createElement('A');
@@ -249,7 +252,7 @@ $(document).ready(function() {
         k++;
       }
       // añadir el fragmento a la capa menuu
-      menuList.appendChild(fragment); 
+      menuList2.appendChild(fragment); 
     }
   });
 
