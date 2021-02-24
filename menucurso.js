@@ -91,12 +91,23 @@ function rescatarDatosCurso(){
 
 function menuu2open(e) {
   const courseData = JSON.parse(localStorage.getItem('courseData'));
-  if (courseData != null){
-    alert(courseData[e].title);
-  } else {
-    alert("error");
+  $('#menuu').animate( { scrollTop : 0 }, 800 );
+  $('.menu-button').attr('data','2');
+
+  var section = e + 1;   
+  var imgback = courseData[e].imageUrl;
+/*   if (section === "20") {
+    submenu20(); 
+    $('#sec-20 .sum1').hide();
   }
-  
+*/
+  $('.menuu2').toggleClass('hide');
+  $(`#sec-${section}`).removeClass('hide');
+  $('.menuu2').css('background-image',  `url(${imgback})`);
+  $('.menuu2').css('background-size', '100%');
+  $('.menuu').toggleClass('hide');
+  $('.menu-toggle').toggleClass('toggle-switch-menu-open');
+  $('.main-menu-switch').toggleClass('toggle-switch');
 }
 
 
@@ -117,7 +128,7 @@ $(document).ready(function() {
   $('.block_html').removeClass("card");
   $('.block_html').removeClass("mb-3");
   $('.block_html').removeClass("block");
-  $('#region-main').removeClass("has-blocks");
+  //$('#region-main').removeClass("has-blocks");
   $('.menu-button').attr('data','0');
 
   // evento pulsar el botón superior derecho
@@ -147,12 +158,14 @@ $(document).ready(function() {
     $('.menuu').toggleClass('hide');
     $('.course-content').toggleClass('move');
 
-    // si no está generado el menú de temas lo generamos
-    if ($('.menuu').attr('data') == '0' ) {
+    // si no está generado el menú de temas (menuu) lo generamos
+    if (document.getElementById('menuu').getAttribute('data') == '0' ) {
+
       // capturamos la capa del menú y ajustamos data=1
       const menuList = document.getElementById('menuu');
       menuList.setAttribute('data', '1');
-
+      
+      // creamos un fragmento para luego incluirlo en la capa
       const fragment = document.createDocumentFragment();
       var k = 0;
       for (const section of courseData) {
@@ -185,9 +198,59 @@ $(document).ready(function() {
       }
       // añadir el fragmento a la capa del menú
       menuList.appendChild(fragment);
-   }
+    }
 
+    // si no está generado el menú de las subsecciones de un tema (menuu2) lo generamos
+    if (document.getElementById('menuu2').getAttribute('data') == '0' ) {
 
+      // capturamos la capa del menú y ajustamos data=1
+      const menuList = document.getElementById('menuu2');
+      menuList.setAttribute('data', '1');
+
+      // creamos un fragmento para luego incluirlo en la capa
+      const fragment = document.createDocumentFragment();
+      var k=1;
+      // recorremos las secciones
+      for (const section of courseData) {
+        // crear la capa section
+        const divSection = document.createElement('SECTION');
+        divSection.classList.add('menusection', 'hide');
+        divSection.setAttribute('id', `sec-${k}`);
+        // recorremos las subsecciones
+        var j=1;
+        for (const subsection of section.subsections) {
+          const detailsTag = document.createElement('DETAILS');
+          detailsTag.classList.add('subm', `sum${k}`);
+          const summaryTag = document.createElement('SUMMARY');
+          summaryTag.textContent = subsection.title;
+          detailsTag.appendChild(summaryTag);
+          const divSubgrid = document.createElement('DIV');
+          divSubgrid.classList.add('subgrid', 'subm');
+          // para cada subsección recorremos las actividades
+          for (const activity of subsection.activities) {
+            const divSubitem = document.createElement('DIV');
+            divSubitem.classList.add('subitem');
+            const subitemLink = document.createElement('A');
+            subitemLink.setAttribute('href', activity.link);
+            subitemLink.setAttribute('target', '_blank');
+            const subitemImage = documet.createElement('IMG');
+            subitemImage.setAttribute('src', activity.imageUrl)
+            subitemImage.setAttribute('alt', activity.name);
+            //subitemImage.setAttribute('height','100'); // descomentar para cambiar el tamaño
+            subitemLink.appendChild(subitemImage);
+            divSubitem.appendChild(subitemLink);
+            divSubgrid.appendChild(divSubitem);
+          }
+          detailsTag.appendChild(divSubgrid);
+          divSection.appendChild(detailsTag);
+          j++;
+        }
+        fragment.appendChild(divSection);
+        k++;
+      }
+      // añadir el fragmento a la capa menuu
+      menuList.appendChild(fragment); 
+    }
   });
 
 
