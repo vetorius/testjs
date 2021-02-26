@@ -253,7 +253,10 @@ $(document).ready(function() {
             subitemImage.setAttribute('src', activity.imageUrl)
             subitemImage.setAttribute('alt', activity.name);
             subitemImage.setAttribute('height','100'); // descomentar para cambiar el tamaño
+            const imageCaption = document.createElement('p');
+            imageCaption.textContent = activity.name;
             subitemLink.appendChild(subitemImage);
+            subitemLink.appendChild(imageCaption);
             divSubitem.appendChild(subitemLink);
             divSubgrid.appendChild(divSubitem);
           }
