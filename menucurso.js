@@ -30,7 +30,7 @@ function insertarEstilo() {
   const estilo = document.createElement('link');
   estilo.rel = 'stylesheet';
   estilo.type = 'text/css';
-  estilo.href = 'https://raw.githubusercontent.com/vetorius/testjs/main/estilomenu.css'; 
+  estilo.href = 'https://cdn.jsdelivr.net/gh/vetorius/testjs@latest/estilomenu.css'; 
   document.head.appendChild(estilo);
 }
 
@@ -125,9 +125,10 @@ function menuu2open(e) {
 }
 
 
-
 //código cuando la página está lista
 $(document).ready(function() {
+  // cargamos los estilos
+  insertarEstilo();
   // obtenemos la información del curso en un objeto y lo guardamos en local storage
   const courseData = rescatarDatosCurso();
   localStorage.removeItem('courseData');
