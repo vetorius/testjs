@@ -21,6 +21,20 @@ function subsectionTitle(code){
 }
 
 /**
+ *  funcion insertarEstilo
+ *  incorpora los estilos necesarios para el menú
+ * 
+ */
+
+function insertarEstilo() {
+  const estilo = document.createElement('link');
+  estilo.rel = 'stylesheet';
+  estilo.type = 'text/css';
+  estilo.href = 'https://raw.githubusercontent.com/vetorius/testjs/main/estilomenu.css'; 
+  document.head.appendChild(estilo);
+}
+
+/**
  *  funcion rescatarDatosCurso
  *  recorre el curso para obtener los datos necesarios
  *  y los devuelve en forma de un objeto javaScript (JSON)
@@ -116,10 +130,8 @@ function menuu2open(e) {
 $(document).ready(function() {
   // obtenemos la información del curso en un objeto y lo guardamos en local storage
   const courseData = rescatarDatosCurso();
-  if (localStorage.getItem('courseData') == null){
-    localStorage.setItem('courseData', JSON.stringify(courseData));
-  }
-
+  localStorage.removeItem('courseData');
+  localStorage.setItem('courseData', JSON.stringify(courseData));
 
   // ajustamos visibilidad de elementos
   $('.menuu').attr('data','0');
