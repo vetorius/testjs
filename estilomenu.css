@@ -178,7 +178,7 @@ nca_book_eso .card-body .card-text {
     top: 50px;
     left: 0px; 
     height: 93vh;
-    width: 105vw;
+    width: 100%;
   }
   .maiin-menu {
     opacity: 0;
