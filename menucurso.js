@@ -122,7 +122,7 @@ $(document).ready(function() {
   // creamos una capa necesaria
   const capaPrincipal = document.createElement('div');
   capaPrincipal.setAttribute('id', 'ncamenu');
-  capaPrincipal.textContent = 'Hola mundo...';
+//  capaPrincipal.textContent = 'Hola mundo...';
   capaPrincipal.addClass('mb-3');
   const padre = document.getElementById('region-main-box');
   const hijo = document.getElementById('region-main');
