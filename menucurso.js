@@ -133,6 +133,15 @@ $(document).ready(function() {
   localStorage.removeItem('courseData');
   localStorage.setItem('courseData', JSON.stringify(courseData));
 
+  // creamos las capas necesarias
+  const capaPrincipal = document.createElement('div');
+  capaPrincipal.setAttribute('id', 'ncamenu');
+  capaPrincipal.textContent = 'Hola mundo...';
+  const padre = document.getElementById('region-main-box');
+  const hijo = document.getElementById('region-main');
+  padre.insertBefore(capaPrincipal, hijo);
+
+
   // ajustamos visibilidad de elementos
   $('.menuu').attr('data','0');
   $('#page').attr('style','margin-top: 0px');
