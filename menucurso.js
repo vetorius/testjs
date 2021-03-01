@@ -99,7 +99,6 @@ function menuu2open(e) {
   const courseData = JSON.parse(localStorage.getItem('courseData'));
   $('#menuu').animate( { scrollTop : 0 }, 800 );
   $('.menu-button').attr('data','2');
-
   var section = e + 1;   
   var imgback = courseData[e].imageUrl;
 /*   if (section === "20") {
@@ -333,7 +332,7 @@ $(document).ready(function() {
   // evento pulsar el botón superior derecho
   $('.menu-toggle').click(function() {
 
-    $("body").css({'overflow':'auto'});
+/*     $("body").css({'overflow':'auto'});
     $(".no-overflow").css({'text-align':'left'});
     $('.no-overflow').css({'overflow':'inherit'});
     $('.menusection').addClass('hide');
@@ -344,19 +343,25 @@ $(document).ready(function() {
     $('.main-menu-switch').toggleClass('toggle-switch');
     if(!$('.menuu2').hasClass('hide')){
         $('.menuu2').toggleClass('hide');
-    }
+    } */
     if($('.menu-button').attr('data') == '0'){
           $('.menu-button').attr('data','1');
-    } else  if($('.menu-button').attr('data') == '1') {
+          $('#ncafront').addClass('hide');
+          $('#menuu').removeClass('hide');
+    } else if($('.menu-button').attr('data') == '1') {
           $('.menu-button').attr('data','0');
-          $('.card').show();
+//          $('.card').show();
+          $('#ncafront').removeClass('hide');
+          $('#menuu').addClass('hide');
     }  else if($('.menu-button').attr('data') == '2') {
           $('.menu-button').attr('data','1');
+          $('#menuu').removeClass('hide');
+          $('#menuu2').addClass('hide');
     }
       
-    $('.menuu').toggleClass('hide');
+/*     $('.menuu').toggleClass('hide');
     $('.course-content').toggleClass('move');
-
+ */
     // si no está generado el menú de temas (menuu) lo generamos
     if (document.getElementById('menuu').getAttribute('data') == '0' ) {
       crearMenuu(courseData);

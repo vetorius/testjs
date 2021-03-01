@@ -426,6 +426,10 @@ nca_book_eso .card-body .card-text {
 
 /* estilo para la sección cero */
 
+#ncafront {
+  background-color: white;
+}
+
 .grid1 {
     position: absolute;
     top: 50px;
