@@ -89,6 +89,12 @@ function rescatarDatosCurso(){
   return courseContent;
 }
 
+/**
+ *  funcion menuu2open
+ *  muestra el menuu2 de la sección que viene en el parámetro e
+ * 
+ */
+
 function menuu2open(e) {
   const courseData = JSON.parse(localStorage.getItem('courseData'));
   $('#menuu').animate( { scrollTop : 0 }, 800 );
@@ -110,6 +116,111 @@ function menuu2open(e) {
   $('.main-menu-switch').toggleClass('toggle-switch');
 }
 
+/**
+ *  funcion crearMenuu
+ *  genera el elemento menuu en el DOM
+ * 
+ */
+
+function crearMenuu(courseData) {
+
+  // capturamos la capa del menú y ajustamos data=1
+  const menuList = document.getElementById('menuu');
+  menuList.setAttribute('data', '1');
+  
+  // creamos un fragmento para luego incluirlo en la capa
+  const fragment = document.createDocumentFragment();
+  var k = 0;
+  for (const section of courseData) {
+    // crear capa sección
+    const divSection = document.createElement('DIV');
+    divSection.classList.add('maiin-menu');
+    // crear capa item para mostrar la imagen
+    const divItems = document.createElement('DIV');
+    divItems.classList.add('items');
+    divItems.style = `cursor: pointer; background-image: url('${section.imageUrl}')`;
+    // añadir la capa item a la capa sección
+    divSection.appendChild(divItems);
+    // crear capa content para incluir el enlace
+    const divContent = document.createElement('DIV');
+    divContent.classList.add('content');
+    // crear el enlace
+    const linkBtn = document.createElement('A');
+    linkBtn.classList.add('btn-link');
+    linkBtn.setAttribute('id', k);
+    linkBtn.setAttribute('onclick', `menuu2open(${k})`);
+    linkBtn.style = 'cursor: pointer;';
+    linkBtn.textContent = section.title;
+    // añadir enlace a capa content
+    divContent.appendChild(linkBtn);
+    // añadir capa content a capa sección
+    divSection.appendChild(divContent);
+    // añadir capa sección al fragmento
+    fragment.appendChild(divSection);
+    k++;
+  }
+  // añadir el fragmento a la capa del menú
+  menuList.appendChild(fragment);
+}
+
+/**
+ *  funcion crearMenuu2
+ *  genera el elemento menuu2 en el DOM
+ * 
+ */
+function crearMenuu2(courseData) {
+
+  // capturamos la capa del menú y ajustamos data=1
+  const menuList2 = document.getElementById('menuu2');
+  menuList2.setAttribute('data', '1');
+
+  // creamos un fragmento para luego incluirlo en la capa
+  const fragment = document.createDocumentFragment();
+  var k=1;
+  // recorremos las secciones
+  for (const section of courseData) {
+    // crear la capa section
+    const divSection = document.createElement('SECTION');
+    divSection.classList.add('menusection', 'hide');
+    divSection.setAttribute('id', `sec-${k}`);
+    // recorremos las subsecciones
+    var j=1;
+    for (const subsection of section.subsections) {
+      const detailsTag = document.createElement('DETAILS');
+      detailsTag.classList.add('subm', `sum${j}`);
+      const summaryTag = document.createElement('SUMMARY');
+      summaryTag.textContent = subsection.title;
+      detailsTag.appendChild(summaryTag);
+      const divSubgrid = document.createElement('DIV');
+      divSubgrid.classList.add('subgrid', 'subm');
+      // para cada subsección recorremos las actividades
+      for (const activity of subsection.activities) {
+        const divSubitem = document.createElement('DIV');
+        divSubitem.classList.add('subitem');
+        const subitemLink = document.createElement('A');
+        subitemLink.setAttribute('href', activity.link);
+        subitemLink.setAttribute('target', '_blank');
+        const subitemImage = document.createElement('IMG');
+        subitemImage.setAttribute('src', activity.imageUrl)
+        subitemImage.setAttribute('alt', activity.name);
+        subitemImage.setAttribute('height','100'); // descomentar para cambiar el tamaño
+        const imageCaption = document.createElement('p');
+        imageCaption.textContent = activity.name;
+        subitemLink.appendChild(subitemImage);
+        subitemLink.appendChild(imageCaption);
+        divSubitem.appendChild(subitemLink);
+        divSubgrid.appendChild(divSubitem);
+      }
+      detailsTag.appendChild(divSubgrid);
+      divSection.appendChild(detailsTag);
+      j++;
+    }
+    fragment.appendChild(divSection);
+    k++;
+  }
+  // añadir el fragmento a la capa menuu
+  menuList2.appendChild(fragment);
+}
 
 //código cuando la página está lista
 $(document).ready(function() {
@@ -119,12 +230,14 @@ $(document).ready(function() {
   localStorage.removeItem('courseData');
   localStorage.setItem('courseData', JSON.stringify(courseData));
 
-  // creamos una capa para alojar el menú
+  // creamos una capa para alojar los distintos menús
   const menunca = document.createDocumentFragment();
   const capaPrincipal = document.createElement('div');
   capaPrincipal.setAttribute('id', 'ncamenu');
+  
   // Creamos e insertamos el frontal
   const frontal = document.createElement('div');
+  frontal.setAttribute('id', 'ncafront');
   frontal.classList.add('grid1');
   //imagen 1
   const capaImagen1 = document.createElement('div');
@@ -153,20 +266,22 @@ $(document).ready(function() {
   capaImagen3bis.setAttribute('style', `background-image: url('${imagen3url}');`);
   capaImagen3.appendChild(capaImagen3bis);
   frontal.appendChild(capaImagen3);
-
   capaPrincipal.appendChild(frontal);
+
   // creamos e insertamos el botón en la capa principal
   const botonMenu = document.createElement('button');
   botonMenu.setAttribute('type', 'button');
   botonMenu.setAttribute('aria-label', 'Haz click para abrir el menú');
   botonMenu.classList.add('menu-button', 'menu-toggle');
   capaPrincipal.appendChild(botonMenu);
+
   // creamos e insertamos la capa menuu
   const menuuLayer = document.createElement('div');
   menuuLayer.setAttribute('id', 'menuu');
   menuuLayer.setAttribute('data', 0);
   menuuLayer.classList.add('menuu', 'main-menu-switch', 'hide');
   capaPrincipal.appendChild(menuuLayer);
+
   // creamos e insertamos la capa menuu2
   const menuu2Layer = document.createElement('div');
   menuu2Layer.setAttribute('id', 'menuu2');
@@ -180,25 +295,28 @@ $(document).ready(function() {
   padre.insertBefore(menunca, hijo);
 
 
-
   // parte de código que viene de la sección general ## por revisar
-  $("#grid1").hide();
+
+/*   $("#grid1").hide();
   $("#region-main").removeClass("has-blocks");
   $("#page-footer").css("display","none");
   $("#back-to-top").css("display","none");
   $(".text-right").css("display","none");
   $(".teacherdash").css("display","none");
+ */
   if ($("body").hasClass("editing")) {
-     $(".grid1").hide();
-     $("#espacio").hide();
-     $("#region-main").addClass("has-blocks");
+    $("#ncafront").hide();
+//     $("#espacio").hide();
+    $("#region-main").addClass("has-blocks");
+  } else {
+    $("#region-main").removeClass("has-blocks");
+    $("#region-main").addClass("hide");
   };
-  if( $('.editingbutton').attr('data-original-title') == 'Turn Edit Off' ){
+
+/*   if( $('.editingbutton').attr('data-original-title') == 'Turn Edit Off' ){
       $('.grid1').css('display','none');
       $('#espacio').css('display','none');
-  };
-
-
+  }; */
 
 
 
@@ -241,99 +359,12 @@ $(document).ready(function() {
 
     // si no está generado el menú de temas (menuu) lo generamos
     if (document.getElementById('menuu').getAttribute('data') == '0' ) {
-
-      // capturamos la capa del menú y ajustamos data=1
-      const menuList = document.getElementById('menuu');
-      menuList.setAttribute('data', '1');
-      
-      // creamos un fragmento para luego incluirlo en la capa
-      const fragment = document.createDocumentFragment();
-      var k = 0;
-      for (const section of courseData) {
-        // crear capa sección
-        const divSection = document.createElement('DIV');
-        divSection.classList.add('maiin-menu');
-        // crear capa item para mostrar la imagen
-        const divItems = document.createElement('DIV');
-        divItems.classList.add('items');
-        divItems.style = `cursor: pointer; background-image: url('${section.imageUrl}')`;
-        // añadir la capa item a la capa sección
-        divSection.appendChild(divItems);
-        // crear capa content para incluir el enlace
-        const divContent = document.createElement('DIV');
-        divContent.classList.add('content');
-        // crear el enlace
-        const linkBtn = document.createElement('A');
-        linkBtn.classList.add('btn-link');
-        linkBtn.setAttribute('id', k);
-        linkBtn.setAttribute('onclick', `menuu2open(${k})`);
-        linkBtn.style = 'cursor: pointer;';
-        linkBtn.textContent = section.title;
-        // añadir enlace a capa content
-        divContent.appendChild(linkBtn);
-        // añadir capa content a capa sección
-        divSection.appendChild(divContent);
-        // añadir capa sección al fragmento
-        fragment.appendChild(divSection);
-        k++;
-      }
-      // añadir el fragmento a la capa del menú
-      menuList.appendChild(fragment);
+      crearMenuu(courseData);
     }
 
     // si no está generado el menú de las subsecciones de un tema (menuu2) lo generamos
     if (document.getElementById('menuu2').getAttribute('data') == '0' ) {
-
-      // capturamos la capa del menú y ajustamos data=1
-      const menuList2 = document.getElementById('menuu2');
-      menuList2.setAttribute('data', '1');
-
-      // creamos un fragmento para luego incluirlo en la capa
-      const fragment = document.createDocumentFragment();
-      var k=1;
-      // recorremos las secciones
-      for (const section of courseData) {
-        // crear la capa section
-        const divSection = document.createElement('SECTION');
-        divSection.classList.add('menusection', 'hide');
-        divSection.setAttribute('id', `sec-${k}`);
-        // recorremos las subsecciones
-        var j=1;
-        for (const subsection of section.subsections) {
-          const detailsTag = document.createElement('DETAILS');
-          detailsTag.classList.add('subm', `sum${j}`);
-          const summaryTag = document.createElement('SUMMARY');
-          summaryTag.textContent = subsection.title;
-          detailsTag.appendChild(summaryTag);
-          const divSubgrid = document.createElement('DIV');
-          divSubgrid.classList.add('subgrid', 'subm');
-          // para cada subsección recorremos las actividades
-          for (const activity of subsection.activities) {
-            const divSubitem = document.createElement('DIV');
-            divSubitem.classList.add('subitem');
-            const subitemLink = document.createElement('A');
-            subitemLink.setAttribute('href', activity.link);
-            subitemLink.setAttribute('target', '_blank');
-            const subitemImage = document.createElement('IMG');
-            subitemImage.setAttribute('src', activity.imageUrl)
-            subitemImage.setAttribute('alt', activity.name);
-            subitemImage.setAttribute('height','100'); // descomentar para cambiar el tamaño
-            const imageCaption = document.createElement('p');
-            imageCaption.textContent = activity.name;
-            subitemLink.appendChild(subitemImage);
-            subitemLink.appendChild(imageCaption);
-            divSubitem.appendChild(subitemLink);
-            divSubgrid.appendChild(divSubitem);
-          }
-          detailsTag.appendChild(divSubgrid);
-          divSection.appendChild(detailsTag);
-          j++;
-        }
-        fragment.appendChild(divSection);
-        k++;
-      }
-      // añadir el fragmento a la capa menuu
-      menuList2.appendChild(fragment); 
+      crearMenuu2(courseData); 
     }
   });
 
