@@ -73,6 +73,7 @@ function rescatarDatosCurso(){
           activities: []
         }
         submatrix.forEach(function(actividad){
+          console.log(actividad);
           const theActivity = {
             name: actividad[2],
             link: actividad[3],
