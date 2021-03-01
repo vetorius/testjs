@@ -53,7 +53,7 @@ function rescatarDatosCurso(){
       // rescatamos la URL de la imagen de la sección y el nombre de su texto alternativo
       let titleSelector = `li[id='${section}'] span.sectionname`;
       const sectionObject = {
-        title: $(titleSelector).textContent,
+        title: $(titleSelector).text,
         imageUrl: $(imageSelector).attr("src"),
         subsections: []
       };
@@ -229,7 +229,6 @@ $(document).ready(function() {
         const divSection = document.createElement('SECTION');
         divSection.classList.add('menusection', 'hide');
         divSection.setAttribute('id', `sec-${k}`);
-        console.log(section.title);
         // recorremos las subsecciones
         var j=1;
         for (const subsection of section.subsections) {
@@ -237,13 +236,11 @@ $(document).ready(function() {
           detailsTag.classList.add('subm', `sum${j}`);
           const summaryTag = document.createElement('SUMMARY');
           summaryTag.textContent = subsection.title;
-          console.log(subsection.title);
           detailsTag.appendChild(summaryTag);
           const divSubgrid = document.createElement('DIV');
           divSubgrid.classList.add('subgrid', 'subm');
           // para cada subsección recorremos las actividades
           for (const activity of subsection.activities) {
-            console.log(activity.name);
             const divSubitem = document.createElement('DIV');
             divSubitem.classList.add('subitem');
             const subitemLink = document.createElement('A');
