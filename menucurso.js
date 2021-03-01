@@ -51,9 +51,8 @@ function rescatarDatosCurso(){
     if(section.split("-")[1] !== "0"){ //eliminamos la sección 0
       let imageSelector = `li[id='${section}'] div.content div.summary img`;
       // rescatamos la URL de la imagen de la sección y el nombre de su texto alternativo
-      let titleSelector = `li[id='${section}'] span.sectionname`;
       const sectionObject = {
-        title: $(titleSelector).text,
+        title: $(this).attr('aria-label'),
         imageUrl: $(imageSelector).attr("src"),
         subsections: []
       };
