@@ -119,14 +119,15 @@ $(document).ready(function() {
   localStorage.removeItem('courseData');
   localStorage.setItem('courseData', JSON.stringify(courseData));
 
-  // creamos las capas necesarias
-  const capaPrincipal = document.createElement('section');
+  // creamos una capa necesaria
+/*   const capaPrincipal = document.createElement('section');
   capaPrincipal.setAttribute('id', 'ncamenu');
   capaPrincipal.textContent = 'Hola mundo...';
   capaPrincipal.addClass('mb-3');
   const padre = document.getElementById('region-main-box');
   const hijo = document.getElementById('region-main');
   padre.insertBefore(capaPrincipal, hijo);
+*/
 
 
   // ajustamos visibilidad de elementos
@@ -140,7 +141,7 @@ $(document).ready(function() {
   $('.menu-button').attr('data','0');
 
   // evento pulsar el botón superior derecho
-  $('#nca-button').click(function() {
+  $('.menu-toggle').click(function() {
 
     $("body").css({'overflow':'auto'});
     $(".no-overflow").css({'text-align':'left'});
