@@ -140,7 +140,7 @@ $(document).ready(function() {
   $('.menu-button').attr('data','0');
 
   // evento pulsar el botón superior derecho
-  $('.menu-toggle').click(function() {
+  $('#nca-button').click(function() {
 
     $("body").css({'overflow':'auto'});
     $(".no-overflow").css({'text-align':'left'});
