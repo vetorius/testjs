@@ -123,6 +123,38 @@ $(document).ready(function() {
   const menunca = document.createDocumentFragment();
   const capaPrincipal = document.createElement('div');
   capaPrincipal.setAttribute('id', 'ncamenu');
+  // Creamos e insertamos el frontal
+  const frontal = document.createElement('div');
+  frontal.classList.add('grid1');
+  //imagen 1
+  const capaImagen1 = document.createElement('div');
+  capaImagen1.classList.add('grid');
+  const capaImagen1bis = document.createElement('div');
+  capaImagen1bis.classList.add('griditems');
+  imagen1url = document.getElementById('general-1').getAttribute('src');
+  capaimagen1bis.setAttribute('style', `background-image: url('${imagen1.url}');`);
+  capaImagen1.appendChild(capaImagen1bis);
+  frontal.appendChild(capaImagen1);
+  //imagen 2
+  const capaImagen2 = document.createElement('div');
+  capaImagen2.classList.add('grid');
+  const capaImagen2bis = document.createElement('div');
+  capaImagen2bis.classList.add('griditems');
+  imagen2url = document.getElementById('general-2').getAttribute('src');
+  capaimagen2bis.setAttribute('style', `background-image: url('${imagen2.url}');`);
+  capaImagen2.appendChild(capaImagen2bis);
+  frontal.appendChild(capaImagen2);
+  //imagen 3
+  const capaImagen3 = document.createElement('div');
+  capaImagen3.classList.add('grid');
+  const capaImagen3bis = document.createElement('div');
+  capaImagen3bis.classList.add('griditems');
+  imagen3url = document.getElementById('general-3').getAttribute('src');
+  capaimagen3bis.setAttribute('style', `background-image: url('${imagen3.url}');`);
+  capaImagen3.appendChild(capaImagen3bis);
+  frontal.appendChild(capaImagen3);
+
+  capaPrincipal.appendChild(frontal);
   // creamos e insertamos el botón en la capa principal
   const botonMenu = document.createElement('button');
   botonMenu.setAttribute('type', 'button');
