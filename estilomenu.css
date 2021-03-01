@@ -167,7 +167,7 @@ nca_book_eso .card-body .card-text {
     top: 50px;
     left: 0px; 
     height: 200vh;
-    width: 105vw;
+    width: 100%;
     display: grid;
     overflow-y: auto;
     grid-template-columns: 100%;
