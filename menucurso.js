@@ -134,9 +134,10 @@ $(document).ready(function() {
   localStorage.setItem('courseData', JSON.stringify(courseData));
 
   // creamos las capas necesarias
-  const capaPrincipal = document.createElement('div');
+  const capaPrincipal = document.createElement('section');
   capaPrincipal.setAttribute('id', 'ncamenu');
   capaPrincipal.textContent = 'Hola mundo...';
+  capaPrincipal.addClass('mb-3');
   const padre = document.getElementById('region-main-box');
   const hijo = document.getElementById('region-main');
   padre.insertBefore(capaPrincipal, hijo);
