@@ -119,14 +119,33 @@ $(document).ready(function() {
   localStorage.removeItem('courseData');
   localStorage.setItem('courseData', JSON.stringify(courseData));
 
-  // creamos una capa necesaria
+  // creamos una capa para alojar el menú
+  const menunca = document.createDocumentFragment();
   const capaPrincipal = document.createElement('div');
   capaPrincipal.setAttribute('id', 'ncamenu');
-  capaPrincipal.textContent = 'Hola mundo...';
-//  capaPrincipal.addClass('mb-3');
+  // creamos e insertamos el botón en la capa principal
+  const botonMenu = document.createElement('button');
+  botonMenu.setAttribute('type', 'button');
+  botonMenu.setAttribute('aria-label', 'Haz click para abrir el menú');
+  botonMenu.classList.add('menu-button', 'menu-toggle');
+  capaPrincipal.appendChild(botonMenu);
+  // creamos e insertamos la capa menuu
+  const menuuLayer = document.createElement('div');
+  menuuLayer.setAttribute('id', 'menuu');
+  menuuLayer.setAttribute('data', 0);
+  menuuLayer.classList.add('menuu', 'main-menu-switch', 'hide');
+  capaPrincipal.appendChild(menuuLayer);
+  // creamos e insertamos la capa menuu2
+  const menuu2Layer = document.createElement('div');
+  menuu2Layer.setAttribute('id', 'menuu2');
+  menuu2Layer.setAttribute('data', 0);
+  menuu2Layer.classList.add('menuu2', 'hide');
+  capaPrincipal.appendChild(menuu2Layer);
+  // Insertamos la capa en el fragmento y el fragmento en la posición elegida
+  menunca.appendChild(capaPrincipal);
   const padre = document.getElementById('region-main-box');
   const hijo = document.getElementById('region-main');
-  padre.insertBefore(capaPrincipal, hijo);
+  padre.insertBefore(menunca, hijo);
 
 
   // ajustamos visibilidad de elementos
