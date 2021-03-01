@@ -132,7 +132,7 @@ $(document).ready(function() {
   const capaImagen1bis = document.createElement('div');
   capaImagen1bis.classList.add('griditems');
   imagen1url = document.getElementById('general-1').getAttribute('src');
-  capaimagen1bis.setAttribute('style', `background-image: url('${imagen1url}');`);
+  capaImagen1bis.setAttribute('style', `background-image: url('${imagen1url}');`);
   capaImagen1.appendChild(capaImagen1bis);
   frontal.appendChild(capaImagen1);
   //imagen 2
@@ -141,7 +141,7 @@ $(document).ready(function() {
   const capaImagen2bis = document.createElement('div');
   capaImagen2bis.classList.add('griditems');
   imagen2url = document.getElementById('general-2').getAttribute('src');
-  capaimagen2bis.setAttribute('style', `background-image: url('${imagen2url}');`);
+  capaImagen2bis.setAttribute('style', `background-image: url('${imagen2url}');`);
   capaImagen2.appendChild(capaImagen2bis);
   frontal.appendChild(capaImagen2);
   //imagen 3
@@ -150,7 +150,7 @@ $(document).ready(function() {
   const capaImagen3bis = document.createElement('div');
   capaImagen3bis.classList.add('griditems');
   imagen3url = document.getElementById('general-3').getAttribute('src');
-  capaimagen3bis.setAttribute('style', `background-image: url('${imagen3url}');`);
+  capaImagen3bis.setAttribute('style', `background-image: url('${imagen3url}');`);
   capaImagen3.appendChild(capaImagen3bis);
   frontal.appendChild(capaImagen3);
 
