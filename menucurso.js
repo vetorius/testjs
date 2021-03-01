@@ -21,20 +21,6 @@ function subsectionTitle(code){
 }
 
 /**
- *  funcion insertarEstilo
- *  incorpora los estilos necesarios para el menú
- * 
- */
-
-function insertarEstilo(hojaEstilo) {
-  const estilo = document.createElement('link');
-  estilo.rel = 'stylesheet';
-  estilo.type = 'text/css';
-  estilo.href = hojaEstilo; 
-  document.head.appendChild(estilo);
-}
-
-/**
  *  funcion rescatarDatosCurso
  *  recorre el curso para obtener los datos necesarios
  *  y los devuelve en forma de un objeto javaScript (JSON)
