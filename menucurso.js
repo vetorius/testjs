@@ -148,6 +148,28 @@ $(document).ready(function() {
   padre.insertBefore(menunca, hijo);
 
 
+
+  // parte de código que viene de la sección general ## por revisar
+  $("#grid1").hide();
+  $("#region-main").removeClass("has-blocks");
+  $("#page-footer").css("display","none");
+  $("#back-to-top").css("display","none");
+  $(".text-right").css("display","none");
+  $(".teacherdash").css("display","none");
+  if ($("body").hasClass("editing")) {
+     $(".grid1").hide();
+     $("#espacio").hide();
+     $("#region-main").addClass("has-blocks");
+  };
+  if( $('.editingbutton').attr('data-original-title') == 'Turn Edit Off' ){
+      $('.grid1').css('display','none');
+      $('#espacio').css('display','none');
+  };
+
+
+
+
+
   // ajustamos visibilidad de elementos
   $('.menuu').attr('data','0');
   $('#page').attr('style','margin-top: 0px');
