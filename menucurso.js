@@ -310,6 +310,7 @@ $(document).ready(function() {
   } else {
     $("#region-main").removeClass("has-blocks");
     $("#region-main").addClass("hide");
+    $('section[data-region="blocks-column"]').addClass('bajar');
   };
 
 /*   if( $('.editingbutton').attr('data-original-title') == 'Turn Edit Off' ){
@@ -357,6 +358,9 @@ $(document).ready(function() {
           $('.menu-button').attr('data','1');
           $('#menuu').removeClass('hide');
           $('#menuu2').addClass('hide');
+          $('.menusection').each(function(){
+            $(this).addClass('hide');
+          });
     }
       
 /*     $('.menuu').toggleClass('hide');

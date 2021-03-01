@@ -64,6 +64,9 @@ nca_book_eso .card-body .card-text {
     position: absolute;
     top: 1800px;
   }
+  .bajar {
+    margin-top: 1000px;
+  }
   .hide {
     display: none;
   }
