@@ -61,19 +61,15 @@ nca_book_eso .card-body .card-text {
     position: absolute;
     top: 1800px;
   }
-
-  .bajar {
-    margin-top: 2000px;
-  }
-
   .hide {
     display: none;
   }
   a:not([href]) {
-      color: white;
+    color: white;
   }
   a:hover {
-    color:white;
+/*    color:white; */
+    font-weight: bold;
   }
   .btn-link {
     display: flex;
@@ -277,7 +273,7 @@ nca_book_eso .card-body .card-text {
     font-size: 30px;
   }
   .sum1 {
-    background-color: red;
+    background-color: lightcoral;
   }
   .sum2 {
     background-color: lightsalmon;
@@ -289,25 +285,25 @@ nca_book_eso .card-body .card-text {
     background-color: lightgreen;
   }
   .sum5 {
-    background-color: green;
+    background-color: lightgrey;
   }
   .sum6 {
-    background-color: darkgreen;
-  }
-  .sum7 {
     background-color: lightblue;
   }
+  .sum7 {
+    background-color: lightseagreen;
+  }
   .sum8 {
-    background-color: dodgerblue;
+    background-color: lightsteelblue;
   } 
   .sum9 {
-    background-color: pink;
+    background-color: lightgoldenrodyellow;
   } 
   .sum10 {
-    background-color: violet;
+    background-color: lightpink;
   } 
   .sum11 {
-    background-color: palevioletred;
+    background-color: lightgray;
   } 
   details > div {
     display: flex;

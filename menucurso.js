@@ -237,6 +237,21 @@ function crearMenuu2(courseData) {
   }
   // añadir el fragmento a la capa menuu
   menuList2.appendChild(fragment);
+
+  /** Close others <details> tag */
+  const allDetails = document.querySelectorAll('details');
+
+  allDetails.forEach(details => {
+      details.addEventListener('toggle', (e) => {
+          if (details.open) {
+              allDetails.forEach(details => {
+                  if (details != e.target && details.open) {
+                      details.open = false;
+                  }
+              });
+          }
+      });
+  });
 }
 
 /** código cuando la página está lista
