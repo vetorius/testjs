@@ -32,27 +32,31 @@ function rescatarDatosCurso(){
   let courseContent = [];
 
   // recorremos cada sección
-  $("li[id^='section-']").each(function(){
-    const section = $(this).attr("id");
-    if(section.split("-")[1] !== "0"){ //eliminamos la sección 0
-      let imageSelector = `li[id='${section}'] div.content div.summary img`;
+  const secciones = document.querySelectorAll('li[id^="section-"]');
+  for (const section of secciones){
+    const sectionName = section.getAttribute('id');
+    if(sectionName.split('-')[1] !== '0'){ //eliminamos la sección 0
+      let sectionImage = document.querySelector(`li[id="${sectionName}"] div.content div.summary img`);
       // rescatamos la URL de la imagen de la sección y el nombre de su texto alternativo
       const sectionObject = {
-        title: $(this).attr('aria-label'),
-        imageUrl: $(imageSelector).attr("src"),
+        title: section.getAttribute('aria-label'),
+        imageUrl: sectionImage.getAttribute('src'),
         subsections: []
       };
       // seleccionamos las actividades
-      const activitySelector = `li[id='${section}'] div.content li.activity`;
+//      const activitySelector = `li[id='${sectionName}'] div.content li.activity`;
+      const actividades = document.querySelectorAll(`li[id="${sectionName}"] div.content li.activity`);
       // recorremos las actividades
       const subsecciones = [];
       var maxIndex = 0;
-      $(activitySelector).each(function(){
-        const activityId = $(this).attr("id");
-        let activityName = $(`li[id=${activityId}] span.instancename`).text();
+      for (const actividad of actividades){
+        const activityId = actividad.getAttribute('id');
+        let activityName = document.querySelector(`li[id="${activityId}"] span.instancename`).textContent;
         activityName = activityName.slice(0, activityName.lastIndexOf(" "));
-        activityLink = $(`li[id=${activityId}] div.activityinstance a:first`).attr("href");
-        activityImageUrl = $(`li[id=${activityId}] div.contentafterlink img`).attr("src");
+        activityLink = document.querySelector(`li[id="${activityId}"] div.activityinstance a:first`)
+                               .getAttribute("href");
+        activityImageUrl =document.querySelector(`li[id="${activityId}"] div.contentafterlink img`)
+                                  .getAttribute("src");
         const subseccion = [ activityName.split(".")[0],
                              subsectionTitle(activityName.split(".")[1]),
                              activityName.split(".")[3],
@@ -62,7 +66,7 @@ function rescatarDatosCurso(){
           maxIndex = parseInt(activityName.split(".")[0])
         }
         subsecciones.push(subseccion);
-      });
+      }
       for (let index = 0; index <= maxIndex; index++) {
         let submatrix = subsecciones.filter(function(subsection){
           return subsection[0] == index;
@@ -83,8 +87,8 @@ function rescatarDatosCurso(){
         sectionObject.subsections.push(subsection);
       }
       courseContent.push(sectionObject); // guardamos sección
-    };
-  });
+    }
+  }
   // devolvemos el objeto con los datos
   return courseContent;
 }
