@@ -21,9 +21,6 @@ nca_book_eso .card-body .card-text {
     right: 50px;
     bottom: 50px;
   }
-  .navtop {
-  /*  display: none;*/
-  }
   h2 { 
     display: none;
   }
@@ -64,9 +61,11 @@ nca_book_eso .card-body .card-text {
     position: absolute;
     top: 1800px;
   }
+
   .bajar {
     margin-top: 2000px;
   }
+
   .hide {
     display: none;
   }
@@ -281,7 +280,7 @@ nca_book_eso .card-body .card-text {
     background-color: red;
   }
   .sum2 {
-    background-color: orange;
+    background-color: lightsalmon;
   }
   .sum3 {
     background-color: lightyellow;
