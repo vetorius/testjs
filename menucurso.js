@@ -42,7 +42,7 @@ function rescatarDatosCurso(){
         title: section.getAttribute('aria-label'),
         imageUrl: sectionImage.getAttribute('src'),
         subsections: []
-      };
+      }
       // seleccionamos las actividades
 //      const activitySelector = `li[id='${sectionName}'] div.content li.activity`;
       const actividades = document.querySelectorAll(`li[id="${sectionName}"] div.content li.activity`);
@@ -53,7 +53,7 @@ function rescatarDatosCurso(){
         const activityId = actividad.getAttribute('id');
         let activityName = document.querySelector(`li[id="${activityId}"] span.instancename`).textContent;
         activityName = activityName.slice(0, activityName.lastIndexOf(" "));
-        activityLink = document.querySelector(`li[id="${activityId}"] div.activityinstance a:first`)
+        activityLink = document.querySelector(`li[id="${activityId}"] div.activityinstance a`)
                                .getAttribute("href");
         activityImageUrl =document.querySelector(`li[id="${activityId}"] div.contentafterlink img`)
                                   .getAttribute("src");
