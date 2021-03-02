@@ -275,7 +275,7 @@ $(document).ready(function() {
   const capaImagen2bis = document.createElement('div');
   capaImagen2bis.classList.add('griditems');
   imagen2url = document.getElementById('general-2').getAttribute('src');
-  capaImagen2bis.setAttribute('style', `background-image: url('${imagen2url}');`);
+  capaImagen2bis.setAttribute('style', `background-image: url('${imagen2url}');background-position-y: 25px;`);
   const indicaBoton = document.createElement('h4');
   indicaBoton.innerHTML = 'Pulsa el botón <b>&oplus;</b> para acceder';
   capaImagen2bis.appendChild(indicaBoton);
