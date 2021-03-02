@@ -456,6 +456,7 @@ nca_book_eso .card-body .card-text {
     width: 100%;
     top: 0;
     left: 0;
+    text-align: center;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

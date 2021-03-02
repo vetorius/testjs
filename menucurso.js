@@ -276,6 +276,9 @@ $(document).ready(function() {
   capaImagen2bis.classList.add('griditems');
   imagen2url = document.getElementById('general-2').getAttribute('src');
   capaImagen2bis.setAttribute('style', `background-image: url('${imagen2url}');`);
+  const indicaBoton = document.createElement('h4');
+  indicaBoton.innerHTML = 'Pulsa el botón <b>&oplus;</b> para acceder';
+  capaImagen2bis.appendChild(indicaBoton);
   capaImagen2.appendChild(capaImagen2bis);
   frontal.appendChild(capaImagen2);
   //imagen 3
