@@ -21,6 +21,18 @@ function subsectionTitle(code){
 }
 
 /**
+ *  funcion insertarEstilo
+ *  incorpora los estilos extra necesarios
+ */
+function insertarEstilo(hojaEstilo) {
+  const estilo = document.createElement('link');
+  estilo.rel = 'stylesheet';
+  estilo.type = 'text/css';
+  estilo.href = hojaEstilo; 
+  document.head.appendChild(estilo);
+}
+
+/**
  *  funcion rescatarDatosCurso
  *  recorre el curso para obtener los datos necesarios
  *  y los devuelve en forma de un objeto javaScript (JSON)
@@ -96,6 +108,8 @@ function rescatarDatosCurso(){
 /**
  *  funcion menuu2open
  *  muestra el menuu2 de la sección que viene en el parámetro e
+ * 
+ * ### quitar llamadas a jquery
  * 
  */
 
@@ -225,7 +239,11 @@ function crearMenuu2(courseData) {
   menuList2.appendChild(fragment);
 }
 
-//código cuando la página está lista
+/** código cuando la página está lista
+ *
+ * ### quitar llamadas a jquery
+ * 
+ */
 $(document).ready(function() {
 
   // obtenemos la información del curso en un objeto y lo guardamos en local storage
@@ -314,7 +332,7 @@ $(document).ready(function() {
   } else {
     $("#region-main").removeClass("has-blocks");
     $("#region-main").addClass("hide");
-    $('section[data-region="blocks-column"]').addClass('bajar');
+    $('section[data-region="blocks-column"]').addClass('hide');
   };
 
 /*   if( $('.editingbutton').attr('data-original-title') == 'Turn Edit Off' ){
@@ -370,9 +388,6 @@ $(document).ready(function() {
           });
     }
       
-/*     $('.menuu').toggleClass('hide');
-    $('.course-content').toggleClass('move');
- */
     // si no está generado el menú de temas (menuu) lo generamos
     if (document.getElementById('menuu').getAttribute('data') == '0' ) {
       crearMenuu(courseData);
@@ -383,7 +398,5 @@ $(document).ready(function() {
       crearMenuu2(courseData); 
     }
   });
-
-
 });
 
