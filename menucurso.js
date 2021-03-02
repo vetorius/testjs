@@ -56,7 +56,6 @@ function rescatarDatosCurso(){
         subsections: []
       }
       // seleccionamos las actividades
-//      const activitySelector = `li[id='${sectionName}'] div.content li.activity`;
       const actividades = document.querySelectorAll(`li[id="${sectionName}"] div.content li.activity`);
       // recorremos las actividades
       const subsecciones = [];
