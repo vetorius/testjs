@@ -5,7 +5,7 @@
  * 
  */
 
-function subsectionTitle(code){
+ function subsectionTitle(code){
 
   const subsectionValues = {
       GUI: 'Guía didáctica', ACO: 'Acogida',
@@ -13,11 +13,20 @@ function subsectionTitle(code){
       TRA: 'Trabajo personal o en grupo',
       ACT: 'Actividad formativa', CIE: 'Cierre'
   };
+  
   if (code.includes('-')) {
       var splitted = code.split('-');
-      return subsectionValues[splitted[0]]+' '+splitted[1];
+      if (splitted[0] in subsectionValues){
+        return subsectionValues[splitted[0]]+' '+splitted[1];
+      } else {
+        return splitted[0]+' '+splitted[1];
+      } 
   }
-  return subsectionValues[code];
+  if (code in subsectionValues) {
+    return subsectionValues[code];
+  } else {
+    return code;
+  }
 }
 
 /**
