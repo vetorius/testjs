@@ -96,20 +96,22 @@ function rescatarDatosCurso(){
         let submatrix = subsecciones.filter(function(subsection){
           return subsection[0] == index;
         });
-        const subsection = {
-          id: submatrix[0][0],
-          title: submatrix[0][1],
-          activities: []
-        }
-        submatrix.forEach(function(actividad){
-          const theActivity = {
-            name: actividad[2],
-            link: actividad[3],
-            imageUrl: actividad[4]
+        if (submatrix.lengt > 0){ //Comprobamos que tenemos subsecciones
+          const subsection = {
+            id: submatrix[0][0],
+            title: submatrix[0][1],
+            activities: []
           }
-          subsection.activities.push(theActivity);
-        });
-        sectionObject.subsections.push(subsection);
+          submatrix.forEach(function(actividad){
+            const theActivity = {
+              name: actividad[2],
+              link: actividad[3],
+              imageUrl: actividad[4]
+            }
+            subsection.activities.push(theActivity);
+          });
+          sectionObject.subsections.push(subsection);
+        }
       }
       courseContent.push(sectionObject); // guardamos sección
     }
