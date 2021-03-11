@@ -75,8 +75,13 @@ function rescatarDatosCurso(){
         activityName = activityName.slice(0, activityName.lastIndexOf(" "));
         activityLink = document.querySelector(`li[id="${activityId}"] div.activityinstance a`)
                                .getAttribute("href");
-        activityImageUrl =document.querySelector(`li[id="${activityId}"] div.contentafterlink img`)
-                                  .getAttribute("src");
+        const imageObject = document.querySelector(`li[id="${activityId}"] div.contentafterlink img`);
+        if (imageObject != null){
+          activityImageUrl = imageObject.getAttribute("src");
+        } else {
+          activityImageUrl = '';
+        }
+        
         const subseccion = [ activityName.split(".")[0],
                              subsectionTitle(activityName.split(".")[1]),
                              activityName.split(".")[3],
